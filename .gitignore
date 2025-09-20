@@ -18,6 +18,7 @@ pids/
 
 *.pid.lock
 public/uploads/
+./uploads/
 *.sqlite
 *.sqlite3
 *.tgz
