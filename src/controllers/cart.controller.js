@@ -6,7 +6,11 @@ export const addToCart = async (req, res) => {
   try {
     const { productId, quantity } = addProductSchema.parse({
       ...req.body,
-      quantity: Number(req.body.quantity) || 1
+    //   quantity: Number(req.body.quantity) || 1
+      quantity: req.body.quantity ? Number(req.body.quantity) : 1
+
+     
+
     });
 
     if (!mongoose.Types.ObjectId.isValid(productId))
@@ -46,7 +50,10 @@ export const getCart = async (req, res) => {
 
 export const updateQuantity = async (req, res) => {
   try {
-    const { quantity } = updateQuantitySchema.parse({ quantity: Number(req.body.quantity) });
+    const { quantity } = updateQuantitySchema.parse({ 
+        // quantity: Number(req.body.quantity)
+        quantity: req.body.quantity ? Number(req.body.quantity) : undefined
+    });
     const { productId } = req.params;
 
     let cart = await Cart.findOne({ userId: req.user.id });
