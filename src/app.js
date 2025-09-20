@@ -1,11 +1,10 @@
 import express from "express";
-import mongoose from "mongoose";
 import session from "express-session";
 import passport from "passport";
 import dotenv from "dotenv";
 import { connectDB } from "./config/db.js";
 import authRoutes from "./routes/auth.route.js";
-import "./config/passport.js"; // passport config
+import "./config/passport.js"; 
 
 
 dotenv.config();
@@ -14,9 +13,13 @@ const app = express();
 
 connectDB();
 
+// Body parser middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 // Session middleware
 app.use(session({
-  secret: "secretKey123", // change in production
+  secret: process.env.SESSION_SECRET , // change in production
   resave: false,
   saveUninitialized: false,
 }));
@@ -58,6 +61,6 @@ app.get("/", (req, res) => {
     `);
 });
 
-app.use("api/auth", authRoutes);
+app.use("/api/auth", authRoutes);
 
 export default app;
