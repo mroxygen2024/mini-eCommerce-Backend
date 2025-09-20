@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import { connectDB } from "./config/db.js";
 import authRoutes from "./routes/auth.route.js";
 import productRoutes from "./routes/product.route.js";
+import cartRoutes from "./routes/cart.route.js";
 import "./config/passport.js"; 
 
 
@@ -64,5 +65,6 @@ app.get("/", (req, res) => {
 
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
+app.use("/api/cart", cartRoutes);
 
 export default app;
