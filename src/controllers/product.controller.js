@@ -18,7 +18,12 @@ export const upload = multer({ storage });
 
 export const createProduct = async (req, res) => {
   try {
-    const parsed = createProductSchema.parse(req.body);
+    // const parsed = createProductSchema.parse(req.body);
+    const parsed = createProductSchema.parse({
+  ...req.body,
+  price: Number(req.body.price)  // convert string to number
+});
+
 
     if (req.file) parsed.image = req.file.filename;
 
@@ -50,7 +55,12 @@ export const getProductById = async (req, res) => {
 
 export const updateProduct = async (req, res) => {
   try {
-    const parsed = updateProductSchema.parse(req.body);
+    // const parsed = updateProductSchema.parse(req.body);
+    const parsed = updateProductSchema.parse({
+  ...req.body,
+  price: req.body.price ? Number(req.body.price) : undefined
+});
+
 
     if (req.file) parsed.image = req.file.filename;
 
