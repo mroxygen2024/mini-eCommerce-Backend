@@ -13,6 +13,7 @@ const app = express();
 
 connectDB();
 
+// Body parser middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
