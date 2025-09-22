@@ -6,6 +6,7 @@ import { connectDB } from "./config/db.js";
 import authRoutes from "./routes/auth.route.js";
 import productRoutes from "./routes/product.route.js";
 import cartRoutes from "./routes/cart.route.js";
+import orderRoutes from "./routes/order.route.js";
 import "./config/passport.js"; 
 
 
@@ -57,7 +58,7 @@ app.get("/", (req, res) => {
 
     <button type="submit">Login</button>
 
-    <p>Or login with google: <a href="/auth/google">Login with Google</a> </p>
+    <p>Or login with google: <a href="/google">Login with Google</a> </p>
 </form> 
      
     `);
@@ -66,5 +67,6 @@ app.get("/", (req, res) => {
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/cart", cartRoutes);
+app.use("/api/orders", cartRoutes);
 
 export default app;

@@ -3,6 +3,7 @@ import passport from "passport";
 import { register, login } from "../controllers/auth.controller.js";
 import { authenticate } from "../middlewares/authenticate.middleware.js";
 import { authorize } from "../middlewares/authorize.middleware.js";
+import { verifyEmail, forgotPassword, resetPassword, changePassword, deleteAccount } from "../controllers/auth.controller.js";
 
 const router = express.Router();
 
@@ -37,17 +38,17 @@ router.get("/logout", (req, res) => {
   });
 });
 
-// Example protected route
-router.get("/profile", authenticate, (req, res) => {
-  res.json({ message: "Your profile", user: req.user });
-});
-
 // Example admin-only route
 router.get("/admin", authenticate, authorize(["admin"]), (req, res) => {
   res.json({ message: "Welcome Admin!" });
 });
 
+router.get("/verify-email", verifyEmail);
+router.post("/forgot-password", forgotPassword);
+router.post("/reset-password", resetPassword);
+router.put("/change-password", authenticate, changePassword);
+router.delete("/delete-account", authenticate, deleteAccount);
+
+
+
 export default router;
-
-
-
