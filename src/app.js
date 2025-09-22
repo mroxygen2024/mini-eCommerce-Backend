@@ -58,7 +58,7 @@ app.get("/", (req, res) => {
 
     <button type="submit">Login</button>
 
-    <p>Or login with google: <a href="/auth/google">Login with Google</a> </p>
+    <p>Or login with google: <a href="/google">Login with Google</a> </p>
 </form> 
      
     `);

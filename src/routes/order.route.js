@@ -1,18 +1,15 @@
 import express from "express";
 import { authenticate } from "../middlewares/authenticate.middleware.js";
-import { authorize } from "../middlewares/authorize.middleware.js";
 import { placeOrder, getAllOrders, getMyOrders, updateOrderStatus } from "../controllers/order.controller.js";
 
 const router = express.Router();
 
+// 🔑 All order routes require login
 router.use(authenticate);
 
-// User routes
-router.post("/", placeOrder);
-router.get("/my", getMyOrders);
-
-// Admin routes
-router.get("/", authorize(["admin"]), getAllOrders);
-router.put("/:id", authorize(["admin"]), updateOrderStatus);
+router.post("/", placeOrder);          // Place new order
+router.get("/my", getMyOrders);        // Get user’s own orders
+router.get("/", getAllOrders);         // Admin: Get all orders
+router.put("/:id", updateOrderStatus); // Admin: Update status
 
 export default router;
